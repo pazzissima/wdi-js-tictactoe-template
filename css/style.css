@@ -24,17 +24,14 @@ img {
   left:50%;
   margin:-420px 0 0 -300px;
 }
-
 @media screen and (max-width: 570px) or (max-height:570px) {
   #game {
     position:relative;
   }
 }
-
 #game > #board {
   overflow:hidden;
 }
-
 .tile {
   float:left;
   height:160px;
@@ -94,10 +91,11 @@ img {
 }
 #teams li.current {
   background:forestgreen;
-  color:#fff;
   opacity:1;
 }
-
+#teams li.current {
+  color:#fff;
+}
 #teams img {
   display:block;
   width:60px;

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="TicTacApp">
   <head>
     <title>TIC TAC TOE</title>
     <link rel="stylesheet" type="text/css" href="css/reset.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.2/angular.js"></script>
+    <script src="js/underscore.min.js"></script>
+    <script src="js/new_controller.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   </head>
   <body>
-
-     <div id="game">
+    <div ng-controller="TicTacController" class="container">
+     <div id="game" ng-show="true">
        <ul id="teams">
         <li>
           <img src="">
@@ -21,6 +25,9 @@
         </li>
       </ul>
       <div id="board">
+        <div ng-repeat='tile in tiles' id='tile{{tile.id}}' class='tile' ng-click='handle_click(tile.id)' ng-class='{active: tile.player != null, combo: is_combo(tile.id)}'>
+          {{tile.player.marker}}
+        </div>
       </div>
       <div id="results">
         <h1></h1>
@@ -28,10 +35,9 @@
         <button>play again</button>
       </div>
     </div>
-
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-  <script src="js/underscore.min.js"></script>
-  <script src="js/tictactoe.js"></script>
+    <div id="overlay">
+    </div>
+  </div>
   </body>
 </html>
 
