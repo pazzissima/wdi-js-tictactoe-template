@@ -5,34 +5,29 @@
     <link rel="stylesheet" type="text/css" href="css/reset.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.2/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.2/angular-sanitize.js"></script>
     <script src="js/underscore.min.js"></script>
     <script src="js/new_controller.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   </head>
   <body>
     <div ng-controller="TicTacController" class="container">
-     <div id="game" ng-show="true">
+     <div id="game" ng-animate=" 'animate' ">
        <ul id="teams">
-        <li>
-          <img src="">
-          <h2>Team <span class="team"></span></h2>
-          <h3 class="player"></h3>
-        </li>
-        <li>
-          <img src="">
-          <h2>Team <span class="team"></span></h2>
-          <h3 class="player"></h3>
+        <li ng-repeat='player in players' ng-class='{current: player == current_player}'>
+          <img ng-src='{{player.img_url}}'>
+          <h2>Team <span class="team" ng-bind-html='player.marker'</span></h2>
+          <h3 class="player">{{player.name}}</h3>
         </li>
       </ul>
       <div id="board">
-        <div ng-repeat='tile in tiles' id='tile{{tile.id}}' class='tile' ng-click='handle_click(tile.id)' ng-class='{active: tile.player != null, combo: is_combo(tile.id)}'>
-          {{tile.player.marker}}
+        <div ng-repeat='tile in tiles' id='tile{{tile.id}}' class='tile' ng-click='handle_click(tile.id)' ng-class='{active: tile.player != null, combo: tile.is_combo}' ng-bind-html='tile.player.marker'>
         </div>
       </div>
-      <div id="results">
-        <h1></h1>
-        <span class="image"></span>
-        <button>play again</button>
+      <div id="results" ng-show="result.message">
+        <h1 ng-bind-html='result.message'></h1>
+        <span class="image"><img ng-src="{{result.img_src}}" alt="{{result.img_alt}}"></img></span>
+        <button ng-click="new_game()">play again</button>
       </div>
     </div>
     <div id="overlay">
